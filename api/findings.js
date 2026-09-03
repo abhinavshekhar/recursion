@@ -1,4 +1,5 @@
-import { getBearer, verifyToken, loadFindings, json } from "../lib/auth.js";
+import { getBearer, verifyToken, json } from "./lib/auth.js";
+import findings from "./data/findings.json" with { type: "json" };
 
 export default function handler(req, res) {
   if (req.method !== "GET") {
@@ -13,9 +14,5 @@ export default function handler(req, res) {
     return json(res, 401, { error: "Invalid or expired token" });
   }
 
-  try {
-    return json(res, 200, loadFindings());
-  } catch {
-    return json(res, 503, { error: "Findings data not available" });
-  }
+  return json(res, 200, findings);
 }
