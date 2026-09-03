@@ -309,7 +309,15 @@ async function init() {
   document.getElementById("userAvatar").textContent = user.name.charAt(0).toUpperCase();
   document.getElementById("logoutBtn").addEventListener("click", logout);
   setupPanels();
-  loadData().catch(() => {});
+  try {
+    await loadData();
+  } catch (err) {
+    const el = document.getElementById("loadError");
+    if (el) {
+      el.textContent = err.message || "Could not load findings. Try signing in again.";
+      el.classList.remove("hidden");
+    }
+  }
 }
 
 if (document.body.dataset.page === "dashboard") {

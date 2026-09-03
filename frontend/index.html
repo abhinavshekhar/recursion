@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Revenue Leakage Detector</title>
+  <title>AI Revenue Leakage Detection System</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="auth.css" />
 </head>
@@ -15,51 +15,144 @@
         <span>Leakage Detector</span>
       </a>
       <ul class="nav-links">
+        <li><a href="#live-demo" class="nav-link">Live results</a></li>
+        <li><a href="#how-it-works" class="nav-link">How it works</a></li>
         <li><a href="login.html" class="nav-link">Sign in</a></li>
-        <li><a href="register.html" class="btn btn-primary btn-nav">Get started</a></li>
+        <li><a href="login.html" class="btn btn-primary btn-nav">Open dashboard</a></li>
       </ul>
     </div>
   </nav>
 
   <section class="section hero-section landing-hero">
     <div class="container hero-content">
-      <p class="section-tag">Healthcare RCM</p>
-      <h1>Find lost revenue<br>before it's gone</h1>
-      <p class="hero-lead">Automatically detect missing charges, coding errors, denied claims, and underpayments — then recover with a smart, prioritized worklist.</p>
+      <p class="section-tag">Healthcare RCM · AI Detection</p>
+      <h1>AI-Based Revenue<br>Leakage Detection System</h1>
+      <p class="hero-lead">Hospitals lose 3–10% of net revenue to hidden leakage across EHR, billing, and clearinghouse data. We join those datasets, run 5 detection rules, and surface a dollar-ranked recovery worklist.</p>
       <div class="hero-actions">
-        <a href="login.html" class="btn btn-primary">Open Dashboard →</a>
-        <a href="register.html" class="btn btn-ghost">Create free account</a>
+        <a href="login.html" class="btn btn-primary">View live dashboard →</a>
+        <a href="#live-demo" class="btn btn-ghost">See detection results</a>
       </div>
-      <p class="phi-note">🔒 Synthetic data only — no real patient info</p>
+      <div class="demo-creds-hero">
+        <strong>Judge demo login:</strong>
+        <code>admin@rcm.local</code> / <code>admin123</code>
+      </div>
+      <p class="phi-note">🔒 Synthetic data only — no real patient information</p>
+    </div>
+  </section>
+
+  <section class="section" id="live-demo">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Live detection output</p>
+        <h2>Real results from our engine</h2>
+        <p class="section-lead">400 synthetic encounters analyzed — findings ranked by dollars at risk</p>
+        <p class="live-updated muted" id="liveUpdated">Loading latest run…</p>
+      </div>
+      <div class="live-stats-grid">
+        <div class="live-stat-card highlight">
+          <span class="live-stat-label">Total at risk</span>
+          <span class="live-stat-value" id="liveAtRisk">$16,375</span>
+        </div>
+        <div class="live-stat-card">
+          <span class="live-stat-label">Findings</span>
+          <span class="live-stat-value" id="liveFindings">310</span>
+        </div>
+        <div class="live-stat-card">
+          <span class="live-stat-label">High priority</span>
+          <span class="live-stat-value" id="liveHigh">—</span>
+        </div>
+        <div class="live-stat-card">
+          <span class="live-stat-label">Encounters</span>
+          <span class="live-stat-value" id="liveEncounters">400</span>
+        </div>
+        <div class="live-stat-card">
+          <span class="live-stat-label">Claims</span>
+          <span class="live-stat-value" id="liveClaims">352</span>
+        </div>
+      </div>
+      <div class="grid-2 demo-grid">
+        <div class="card">
+          <h2>Leakage by category</h2>
+          <div id="liveCategories" class="live-cat-list">
+            <div class="live-cat-row"><span>Missing charges</span><strong>$5,730</strong></div>
+            <div class="live-cat-row"><span>Coding errors</span><strong>$4,316</strong></div>
+            <div class="live-cat-row"><span>Unsubmitted claims</span><strong>$3,236</strong></div>
+            <div class="live-cat-row"><span>Denied, no follow-up</span><strong>$1,299</strong></div>
+            <div class="live-cat-row"><span>Underpayments</span><strong>$1,794</strong></div>
+          </div>
+        </div>
+        <div class="card">
+          <h2>What judges can explore</h2>
+          <ul class="judge-checklist">
+            <li><strong>Overview</strong> — KPIs, category chart, top 5 actions</li>
+            <li><strong>Worklist</strong> — searchable table of all findings with severity</li>
+            <li><strong>Analytics</strong> — 5 charts: category, severity, providers, counts, clusters</li>
+            <li><strong>Recovery Budget</strong> — allocate $ by work type and track recovered dollars</li>
+          </ul>
+          <a href="login.html" class="btn btn-primary full">Sign in to explore →</a>
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="section section-alt">
     <div class="container">
       <div class="section-header" style="text-align:center">
-        <p class="section-tag">What we detect</p>
-        <h2>Five revenue leakage types</h2>
+        <p class="section-tag">The problem</p>
+        <h2>Revenue hides across disconnected systems</h2>
+        <p class="section-lead" style="max-width:720px;margin:0.75rem auto 0">Billing errors, missing charges, wrong CPT/ICD codes, claims never submitted, denials without follow-up, and payer underpayments — nobody sees the full picture because EHR, billing, and clearinghouse data live in silos.</p>
       </div>
       <div class="feature-grid">
         <div class="feature-card">
           <span class="feature-icon blue">📋</span>
           <span>Missing charges</span>
+          <p class="feature-desc">Services documented but never billed</p>
         </div>
         <div class="feature-card">
           <span class="feature-icon cyan">🔢</span>
           <span>Coding errors</span>
+          <p class="feature-desc">CPT/ICD mismatches reduce reimbursement</p>
         </div>
         <div class="feature-card">
           <span class="feature-icon purple">📤</span>
           <span>Unsubmitted claims</span>
+          <p class="feature-desc">Claims stuck in billing, never sent to payer</p>
         </div>
         <div class="feature-card">
           <span class="feature-icon amber">❌</span>
           <span>Denied claims</span>
+          <p class="feature-desc">Denials with no follow-up or appeal</p>
         </div>
         <div class="feature-card">
           <span class="feature-icon rose">💰</span>
           <span>Underpayments</span>
+          <p class="feature-desc">Paid below contracted fee schedule</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-header" style="text-align:center">
+        <p class="section-tag">Our solution</p>
+        <h2>Detect → Prioritize → Recover</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-num">1</span>
+          <h3>Join data</h3>
+          <p>Encounters, claims, remittances, and fee schedules merged into one analysis layer.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">2</span>
+          <h3>Run 5 rules</h3>
+          <p>Automated detection for each leakage type with severity scoring and dollar impact.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">3</span>
+          <h3>Act on worklist</h3>
+          <p>Prioritized findings with recommended actions, analytics, and recovery budget tracking.</p>
         </div>
       </div>
     </div>
@@ -67,17 +160,21 @@
 
   <section class="section cta-section">
     <div class="container">
-      <h2>Start recovering revenue today</h2>
-      <p class="hero-lead" style="margin:0.75rem auto 1.75rem">Live dashboard, interactive charts, and a dollar-ranked worklist — ready in seconds.</p>
-      <a href="login.html" class="btn btn-primary">Sign in now →</a>
+      <h2>Ready for the live demo?</h2>
+      <p class="hero-lead" style="margin:0.75rem auto 1.25rem">Dashboard, analytics, and recovery budget — all live with synthetic hospital data.</p>
+      <div class="demo-creds-hero" style="margin-bottom:1.25rem">
+        <strong>Login:</strong> <code>admin@rcm.local</code> / <code>admin123</code>
+      </div>
+      <a href="login.html" class="btn btn-primary">Open dashboard now →</a>
     </div>
   </section>
 
   <footer class="footer container">
-    <p>Revenue Leakage Detector</p>
+    <p>AI-Based Revenue Leakage Detection System · Synthetic RCM data</p>
   </footer>
 
   <script src="auth.js"></script>
+  <script src="landing.js"></script>
   <script>redirectIfAuthenticated();</script>
 </body>
 </html>

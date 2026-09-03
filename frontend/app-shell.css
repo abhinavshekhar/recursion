@@ -132,6 +132,10 @@
 .panel { display: none; animation: fadeUp 0.35s ease; }
 .panel.active { display: block; }
 
+#loadError {
+  margin: -0.5rem 0 1rem;
+}
+
 /* KPI row */
 .kpi-row {
   display: grid;

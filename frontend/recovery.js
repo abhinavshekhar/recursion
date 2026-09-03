@@ -203,7 +203,11 @@ async function init() {
   document.getElementById("userRole").textContent = user.role;
   document.getElementById("userAvatar").textContent = user.name.charAt(0).toUpperCase();
   document.getElementById("logoutBtn").addEventListener("click", logout);
-  loadData().catch(() => {});
+  try {
+    await loadData();
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 if (document.body.dataset.page === "recovery") {

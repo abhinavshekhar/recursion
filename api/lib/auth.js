@@ -103,6 +103,16 @@ export function readBody(req) {
 }
 
 export function loadFindings() {
-  const file = path.join(__dirname, "..", "..", "frontend", "data", "findings.json");
-  return JSON.parse(fs.readFileSync(file, "utf8"));
+  const candidates = [
+    path.join(__dirname, "..", "data", "findings.json"),
+    path.join(__dirname, "..", "..", "frontend", "data", "findings.json"),
+    path.join(process.cwd(), "api", "data", "findings.json"),
+    path.join(process.cwd(), "frontend", "data", "findings.json"),
+  ];
+  for (const file of candidates) {
+    if (fs.existsSync(file)) {
+      return JSON.parse(fs.readFileSync(file, "utf8"));
+    }
+  }
+  throw new Error("Findings data file not found");
 }
