@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In | Revenue Leakage Detector</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body class="auth-page">
+  <div class="auth-shell">
+    <div class="auth-brand">
+      <span class="logo">◈</span>
+      <h1>Leakage Detector</h1>
+      <p>Your command center for finding and fixing revenue loss across billing workflows.</p>
+      <ul class="auth-features">
+        <li>Prioritized leakage worklist</li>
+        <li>Real-time detection analytics</li>
+        <li>Root-cause clustering insights</li>
+      </ul>
+    </div>
+
+    <div class="auth-card">
+      <h2>Sign in</h2>
+      <p class="auth-sub">Enter your credentials to access the dashboard</p>
+
+      <div class="alert alert-error hidden" id="loginError"></div>
+
+      <form id="loginForm" class="auth-form">
+        <label>
+          Email
+          <input type="email" id="email" name="email" placeholder="admin@rcm.local" required autocomplete="email" />
+        </label>
+        <label>
+          Password
+          <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password" />
+        </label>
+        <button type="submit" class="btn btn-primary btn-full" id="loginBtn">Sign in</button>
+      </form>
+
+      <p class="auth-switch">Don't have an account? <a href="register.html">Create one</a></p>
+      <p class="auth-switch"><a href="index.html">← Back to home</a></p>
+
+      <div class="demo-box">
+        <strong>Demo account</strong>
+        <p>Email: <code>admin@rcm.local</code></p>
+        <p>Password: <code>admin123</code></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    redirectIfAuthenticated();
+
+    const form = document.getElementById("loginForm");
+    const errorEl = document.getElementById("loginError");
+    const btn = document.getElementById("loginBtn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      hideError(errorEl);
+      btn.disabled = true;
+      btn.textContent = "Signing in...";
+
+      try {
+        await login(
+          document.getElementById("email").value.trim(),
+          document.getElementById("password").value
+        );
+        window.location.href = pageUrl("/dashboard.html");
+      } catch (err) {
+        showError(errorEl, err.message);
+        btn.disabled = false;
+        btn.textContent = "Sign in";
+      }
+    });
+  </script>
+</body>
+</html>

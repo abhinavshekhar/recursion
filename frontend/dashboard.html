@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Revenue Leakage Detector</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="auth.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-page="dashboard">
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="nav-brand">
+        <span class="logo">◈</span>
+        <span>Leakage Detector</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#problem" class="nav-link">Problem</a></li>
+        <li><a href="#solution" class="nav-link">Solution</a></li>
+        <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+        <li><a href="#rules" class="nav-link">Detection Rules</a></li>
+        <li class="nav-user">
+          <div class="user-pill">
+            <div class="user-avatar" id="userAvatar">?</div>
+            <div>
+              <div id="userName">Loading...</div>
+              <div class="user-role" id="userRole">analyst</div>
+            </div>
+          </div>
+          <button class="btn-logout" id="logoutBtn">Sign out</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <section id="home" class="section hero-section">
+    <div class="hero-bg"></div>
+    <div class="container hero-content">
+      <p class="section-tag">Welcome back</p>
+      <h1>Revenue at risk,<br>found instantly</h1>
+      <p class="hero-lead">Your automated detection engine scans encounters, claims, and payments to surface recoverable dollars — ranked and ready to act on.</p>
+      <div class="hero-actions">
+        <a href="#dashboard" class="btn btn-primary">Go to worklist →</a>
+        <a href="#problem" class="btn btn-ghost">See leakage types</a>
+      </div>
+      <div class="hero-stats" id="heroStats">
+        <div class="stat-card">
+          <span class="stat-value" id="statTotal">$0</span>
+          <span class="stat-label">Total at risk</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="statEncounters">0</span>
+          <span class="stat-label">Encounters analyzed</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="statFindings">0</span>
+          <span class="stat-label">Leakage findings</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">5</span>
+          <span class="stat-label">Detection categories</span>
+        </div>
+      </div>
+      <p class="phi-note">All data is synthetic — no real patient information was used.</p>
+    </div>
+  </section>
+
+  <section id="problem" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Overview</p>
+        <h2>Revenue leakage types</h2>
+      </div>
+      <div class="problem-grid">
+        <div class="card problem-text">
+          <p>Healthcare organizations lose significant revenue due to unnoticed errors in billing, coding mistakes, missing charges, and claim submission gaps. These revenue leakages often remain undetected because healthcare data is distributed across multiple systems such as <strong>EHR</strong>, <strong>billing systems</strong>, and <strong>clearinghouses</strong>.</p>
+          <p>RCM teams spend considerable time manually auditing claims and identifying lost revenue opportunities.</p>
+          <div class="impact-box">
+            <h3>Impact</h3>
+            <p>These issues lead to significant financial loss and require extensive manual auditing by RCM teams.</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>The Problem</h3>
+          <div class="problem-cards" id="problemCards">
+            <button class="problem-card" data-category="missing_charge">
+              <span class="problem-icon">📋</span>
+              <div><strong>Missing charges</strong><p>Charges not captured during encounter documentation</p></div>
+            </button>
+            <button class="problem-card" data-category="coding_error">
+              <span class="problem-icon">🔢</span>
+              <div><strong>Incorrect CPT/ICD coding</strong><p>Billed codes don't match documented procedures</p></div>
+            </button>
+            <button class="problem-card" data-category="unsubmitted_claim">
+              <span class="problem-icon">📤</span>
+              <div><strong>Claims not submitted</strong><p>Patient visits without claim submission</p></div>
+            </button>
+            <button class="problem-card" data-category="denied_no_followup">
+              <span class="problem-icon">❌</span>
+              <div><strong>Denied claims not followed up</strong><p>Denials left unresolved past appeal windows</p></div>
+            </button>
+            <button class="problem-card" data-category="underpayment">
+              <span class="problem-icon">💰</span>
+              <div><strong>Underpayments from payers</strong><p>Insurance pays below contracted rates</p></div>
+            </button>
+          </div>
+          <p class="hint">Click any problem type to jump to matching findings in the dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="solution" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Our Solution</p>
+        <h2>How the system works</h2>
+      </div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-num">1</div><h3>Data ingestion</h3><p>Join encounters, claims, remittances, and fee schedules from disconnected systems.</p></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="flow-num">2</div><h3>Rule-based detection</h3><p>Five explainable rules flag missing charges, coding errors, denials, and underpayments.</p></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="flow-num">3</div><h3>Prioritized worklist</h3><p>Findings ranked by dollar impact with severity and recommended actions.</p></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="flow-num">4</div><h3>Root-cause clustering</h3><p>Surface systemic patterns across providers and CPT codes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard" class="section">
+    <div class="container">
+      <div class="section-header row">
+        <div>
+          <p class="section-tag">Live Dashboard</p>
+          <h2>Revenue leakage worklist</h2>
+        </div>
+        <p class="meta" id="generatedAt"></p>
+      </div>
+      <div class="dashboard-hero card">
+        <p class="eyebrow">Total revenue at risk</p>
+        <p class="hero-number" id="totalAtRisk">$0</p>
+        <p class="hero-sub" id="heroSub">Loading...</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <h2>Leakage by category</h2>
+            <button class="btn-sm" id="toggleChart">Bar view</button>
+          </div>
+          <canvas id="categoryChart"></canvas>
+        </div>
+        <div class="card">
+          <h2>Root-cause clusters</h2>
+          <div id="clustersList" class="clusters-list"></div>
+        </div>
+      </div>
+      <div class="severity-bar card" id="severityBar"></div>
+      <div class="card worklist">
+        <div class="worklist-header">
+          <h2>Prioritized worklist</h2>
+          <div class="filters">
+            <input type="search" id="searchInput" placeholder="Search ID, encounter, provider..." />
+            <label>Category <select id="filterCategory"><option value="all">All</option><option value="missing_charge">Missing charge</option><option value="coding_error">Coding error</option><option value="unsubmitted_claim">Unsubmitted claim</option><option value="denied_no_followup">Denied, no follow-up</option><option value="underpayment">Underpayment</option></select></label>
+            <label>Severity <select id="filterSeverity"><option value="all">All</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></label>
+          </div>
+        </div>
+        <p class="result-count" id="resultCount"></p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th data-sort="id">ID ↕</th>
+                <th data-sort="category">Category ↕</th>
+                <th data-sort="encounter_id">Encounter ↕</th>
+                <th data-sort="provider_id">Provider ↕</th>
+                <th data-sort="amount_at_risk">Amount ↕</th>
+                <th data-sort="severity">Severity ↕</th>
+              </tr>
+            </thead>
+            <tbody id="findingsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rules" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Detection Engine</p>
+        <h2>Explainable detection rules</h2>
+      </div>
+      <div class="rules-grid" id="rulesGrid">
+        <details class="rule-card" open><summary><span class="rule-badge missing_charge">Missing charge</span><span class="rule-count" data-rule="missing_charge">0 findings</span></summary><p><strong>Rule:</strong> Encounter has no matching claim, and encounter is more than 3 days old.</p><p><strong>Action:</strong> Verify charge was entered; submit claim if missing.</p></details>
+        <details class="rule-card"><summary><span class="rule-badge coding_error">Coding error</span><span class="rule-count" data-rule="coding_error">0 findings</span></summary><p><strong>Rule:</strong> Billed CPT code does not match documented CPT for the same encounter.</p><p><strong>Action:</strong> Review coding; correct claim or rebill with documented CPT.</p></details>
+        <details class="rule-card"><summary><span class="rule-badge unsubmitted_claim">Unsubmitted claim</span><span class="rule-count" data-rule="unsubmitted_claim">0 findings</span></summary><p><strong>Rule:</strong> Claim exists with status not_submitted, more than 7 days since encounter.</p><p><strong>Action:</strong> Submit claim to payer or investigate billing hold.</p></details>
+        <details class="rule-card"><summary><span class="rule-badge denied_no_followup">Denied, no follow-up</span><span class="rule-count" data-rule="denied_no_followup">0 findings</span></summary><p><strong>Rule:</strong> Claim denied more than 45 days ago with no resubmission.</p><p><strong>Action:</strong> Appeal denial or resubmit corrected claim before deadline.</p></details>
+        <details class="rule-card"><summary><span class="rule-badge underpayment">Underpayment</span><span class="rule-count" data-rule="underpayment">0 findings</span></summary><p><strong>Rule:</strong> Paid amount is more than 2% below contracted fee schedule rate.</p><p><strong>Action:</strong> Review remittance advice; file underpayment appeal with payer.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <aside class="drawer hidden" id="drawer">
+    <button class="close-btn" id="closeDrawer" aria-label="Close">×</button>
+    <p class="drawer-id" id="drawerId"></p>
+    <h3 id="drawerCategory"></h3>
+    <p class="drawer-amount" id="drawerAmount"></p>
+    <div class="drawer-block"><h4>Explanation</h4><p id="drawerExplanation"></p></div>
+    <div class="drawer-block"><h4>Recommended action</h4><p id="drawerAction"></p></div>
+    <button class="btn btn-primary drawer-btn" id="viewInTable">View in worklist</button>
+  </aside>
+  <div class="overlay hidden" id="overlay"></div>
+
+  <script src="auth.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

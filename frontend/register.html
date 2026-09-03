@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account | Revenue Leakage Detector</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body class="auth-page">
+  <div class="auth-shell">
+    <div class="auth-brand">
+      <span class="logo">◈</span>
+      <h1>Get started</h1>
+      <p>Create your account and start detecting revenue leakage in minutes.</p>
+      <ul class="auth-features">
+        <li>Secure JWT authentication</li>
+        <li>Role-based access</li>
+        <li>Encrypted password storage</li>
+      </ul>
+    </div>
+
+    <div class="auth-card">
+      <h2>Create account</h2>
+      <p class="auth-sub">Register to start analyzing revenue leakage</p>
+
+      <div class="alert alert-error hidden" id="registerError"></div>
+
+      <form id="registerForm" class="auth-form">
+        <label>
+          Full name
+          <input type="text" id="name" name="name" placeholder="Jane Analyst" required autocomplete="name" minlength="2" />
+        </label>
+        <label>
+          Email
+          <input type="email" id="email" name="email" placeholder="you@hospital.org" required autocomplete="email" />
+        </label>
+        <label>
+          Password
+          <input type="password" id="password" name="password" placeholder="Min. 6 characters" required autocomplete="new-password" minlength="6" />
+        </label>
+        <label>
+          Confirm password
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repeat password" required autocomplete="new-password" minlength="6" />
+        </label>
+        <button type="submit" class="btn btn-primary btn-full" id="registerBtn">Create account</button>
+      </form>
+
+      <p class="auth-switch">Already have an account? <a href="login.html">Sign in</a></p>
+      <p class="auth-switch"><a href="index.html">← Back to home</a></p>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    redirectIfAuthenticated();
+
+    const form = document.getElementById("registerForm");
+    const errorEl = document.getElementById("registerError");
+    const btn = document.getElementById("registerBtn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      hideError(errorEl);
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const confirm = document.getElementById("confirmPassword").value;
+
+      if (password !== confirm) {
+        showError(errorEl, "Passwords do not match");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Creating account...";
+
+      try {
+        await register(name, email, password);
+        window.location.href = pageUrl("/dashboard.html");
+      } catch (err) {
+        showError(errorEl, err.message);
+        btn.disabled = false;
+        btn.textContent = "Create account";
+      }
+    });
+  </script>
+</body>
+</html>
