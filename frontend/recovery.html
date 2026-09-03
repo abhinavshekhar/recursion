@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recovery Budget | Leakage Detector</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="auth.css" />
+  <link rel="stylesheet" href="app-shell.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-page="recovery" class="app-body">
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar">
+      <a href="dashboard.html" class="sidebar-brand">
+        <span class="logo">◈</span>
+        <span>Leakage Detector</span>
+      </a>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item nav-link-item">Overview</a>
+        <a href="dashboard.html#worklist" class="nav-item nav-link-item">Worklist</a>
+        <a href="dashboard.html#analytics" class="nav-item nav-link-item">Analytics</a>
+        <a href="recovery.html" class="nav-item nav-link-item active">Recovery Budget</a>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="user-pill compact">
+          <div class="user-avatar" id="userAvatar">?</div>
+          <div>
+            <div id="userName">—</div>
+            <div class="user-role" id="userRole">analyst</div>
+          </div>
+        </div>
+        <button class="btn-logout" id="logoutBtn">Sign out</button>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <header class="app-topbar">
+        <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        <div>
+          <h1 class="page-title">Recovery Budget</h1>
+          <p class="page-meta">Allocate recovery effort & track dollars by work type</p>
+        </div>
+        <span class="secure-badge">🔒 Secure session</span>
+      </header>
+
+      <section class="panel active">
+        <div class="kpi-row">
+          <div class="kpi-card highlight">
+            <span class="kpi-label">Total at risk</span>
+            <span class="kpi-value" id="budgetAtRisk">$0</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Budget allocated</span>
+            <span class="kpi-value" id="budgetAllocated">$0</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Recovered</span>
+            <span class="kpi-value recovered" id="budgetRecovered">$0</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Remaining gap</span>
+            <span class="kpi-value" id="budgetGap">$0</span>
+          </div>
+        </div>
+
+        <div class="grid-2 compact-grid">
+          <div class="card">
+            <h2>Budget vs at-risk</h2>
+            <canvas id="budgetChart" height="220"></canvas>
+          </div>
+          <div class="card">
+            <h2>Recovery progress</h2>
+            <canvas id="progressChart" height="220"></canvas>
+          </div>
+        </div>
+
+        <div class="card budget-section">
+          <div class="card-header">
+            <h2>Allocate budget by work type</h2>
+            <button class="btn btn-sm" id="resetBudget">Reset all</button>
+          </div>
+          <p class="hint">Set how much you'll invest in recovering each leakage type. Mark items recovered as work completes.</p>
+          <div id="budgetCards" class="budget-cards"></div>
+        </div>
+
+        <div class="card">
+          <h2>Assigned findings</h2>
+          <div id="assignedList" class="assigned-list">
+            <p class="muted">No findings assigned yet. Open a finding from the worklist and click "Add to recovery budget".</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="recovery.js"></script>
+</body>
+</html>
