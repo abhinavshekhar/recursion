@@ -1,7 +1,7 @@
 const TOKEN_KEY = "rcm_token";
 const USER_KEY = "rcm_user";
 
-// API is served by Flask on the same origin when using start.bat
+// API is served on the same origin (Flask locally, Vercel serverless in production)
 const API_BASE = window.location.protocol === "file:" ? "http://localhost:5000" : "";
 
 function getToken() {
